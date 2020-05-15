@@ -1,0 +1,19 @@
+
+r
+java:S1104"PMake next a static final constant or non-public and provide accessors if needed.(ÆÕ•„ıÿÿÿÿ8£üÙÆ“.
+r
+java:S1104"PMake data a static final constant or non-public and provide accessors if needed.(…¦‰’şÿÿÿÿ8£üÙÆ“.
+n
+java:S1223["LRename this method to prevent any misunderstanding or make it a constructor.(µÅøÿÿÿÿ8£üÙÆ“.
+p
+java:S2272&"NAdd a "NoSuchElementException" for iteration beyond the end of the collection.(¥½©²şÿÿÿÿ8£üÙÆ“.
+E
+java:S1125-"(Remove the literal "true" boolean value.(¬ À8£üÙÆ“.
+o	java:S100["NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µÅøÿÿÿÿ8£üÙÆ“.
+T
+java:S1117]"7Rename "head" which hides the field declared at line 7.(÷­Üê8£üÙÆ“.
+{
+java:S2293d"YReplace the type specification in this constructor call with the diamond operator ("<>").(€ˆéıÿÿÿÿ8£üÙÆ“.
+F
+java:S1481]")Remove this unused "head" local variable.(÷­Üê8£üÙÆ“.
+]	java:S125="<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ8£üÙÆ“.

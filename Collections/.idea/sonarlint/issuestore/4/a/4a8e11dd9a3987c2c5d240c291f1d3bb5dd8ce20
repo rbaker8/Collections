@@ -1,0 +1,24 @@
+
+<
+java:S1659"Declare "j" on a separate line.(¦«¬×8·ÔÆ“.
+\
+java:S1854.":Remove this useless assignment to local variable "bytes2".(­ĞªÂüÿÿÿÿ8·ÔÆ“.
+V
+java:S1854-"9Remove this useless assignment to local variable "bytes".(Œßµù8·ÔÆ“.
+{
+java:S2293+"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ä¼Åœşÿÿÿÿ8·ÔÆ“.
+V
+java:S2864="4Iterate over the "entrySet" instead of the "keySet".(Ô°‰±üÿÿÿÿ8·ÔÆ“.
+U	java:S106?"9Replace this use of System.out or System.err by a logger.(›Æ€ğ8·ÔÆ“.
+U	java:S106C"9Replace this use of System.out or System.err by a logger.(Áß‡Ü8·ÔÆ“.
+Z	java:S106R"9Replace this use of System.out or System.err by a logger.(¬Šèüÿÿÿÿ8·ÔÆ“.
+E
+java:S1125V"(Remove the literal "true" boolean value.(é§Š8·ÔÆ“.
+E
+java:S1125Y"(Remove the literal "true" boolean value.(é§Š8·ÔÆ“.
+U	java:S106Z"9Replace this use of System.out or System.err by a logger.(«õİæ8·ÔÆ“.
+Z	java:S106\"9Replace this use of System.out or System.err by a logger.(ÃÊû›úÿÿÿÿ8·ÔÆ“.
+G
+java:S1481-"*Remove this unused "bytes" local variable.(Œßµù8·ÔÆ“.
+M
+java:S1481."+Remove this unused "bytes2" local variable.(­ĞªÂüÿÿÿÿ8·ÔÆ“.
