@@ -12,13 +12,15 @@ public class SortingTests implements Test
     public void testMergeSort()
     {
         String[] names = new String[]{"c", "d", "a", "b" };
-        MergeSortAlgorithms<String> sorter = new MergeSortAlgorithms<String>();
+        MergeSortAlgorithms<String> sorter = new MergeSortAlgorithms<>();
         sorter.sort(names);
         System.out.println(Arrays.toString(names));
+        assert Arrays.toString(names).equals("[a, b, c, d]");
+
         names = new String[]{"c", "b", "a"};
         sorter.sort(names);
         System.out.println(Arrays.toString(names));
-
+        assert Arrays.toString(names).equals("[a, b, c]");
     }
 
     @Override

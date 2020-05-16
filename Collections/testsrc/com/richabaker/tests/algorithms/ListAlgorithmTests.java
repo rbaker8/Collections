@@ -27,7 +27,9 @@ public class ListAlgorithmTests implements Test
         list.add("a");
         list.add("b");
         list.add("c");
-
+        list.reverse();
+        System.out.println(list.toString());
+        assert(list.toString().equals("{c, b, a}"));
     }
 
     @Override

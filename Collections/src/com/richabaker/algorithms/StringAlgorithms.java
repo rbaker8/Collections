@@ -40,11 +40,10 @@ public class StringAlgorithms
 
     public void countChars(String s)
     {
-        Map<Character, Integer> charsMap = new HashMap<Character, Integer>();
+        Map<Character, Integer> charsMap = new HashMap<>();
 
         byte[] bytes = new byte[256];
         byte[] bytes2 = new byte[10];
-
         char[] chars = s.toCharArray();
 
         for (char c: chars)
@@ -83,10 +82,10 @@ public class StringAlgorithms
                     break;
                 }
             }
-            if (found == true)
+            if (found)
                 break;
         }
-        if (found == true)
+        if (found)
             System.out.print("YES");
         else
             System.out.print("NO");

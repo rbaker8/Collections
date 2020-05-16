@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class BinarySearchTests implements Test
 {
-    private BinarySearchTree<String, String> tree = new BinarySearchTree<String, String>();
+    private BinarySearchTree<String, String> tree = new BinarySearchTree<>();
 
     @Test
     public void BinarySearchTreeTests()
@@ -20,6 +20,7 @@ public class BinarySearchTests implements Test
         tree.insert("d", "d");
         tree.insert("e", "e");
         String value = tree.find("e");
+        assert(value.equals("e"));
     }
 
     @Override

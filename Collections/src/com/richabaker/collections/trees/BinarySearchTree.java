@@ -6,6 +6,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>
     {
         public Node(K key, V value)
         {
+            this.key = key;
             this.value = value;
         }
 
@@ -48,13 +49,24 @@ public class BinarySearchTree<K extends Comparable<K>, V>
         }
     }
 
-    public Node delete(T key)
+    public Node delete(K key)
     {
         return null;
     }
 
-    public V find(T key)
+    public V find(K key)
     {
-        
+        return find(root, key);
+    }
+
+    private V find(Node node, K key)
+    {
+        if (node == null)
+            return null;
+
+        int compare = key.compareTo(node.key);
+        if (compare == 0) return node.value;
+        if (compare < 0)  return find(node.left, key);
+        return find(node.right, key);
     }
 }

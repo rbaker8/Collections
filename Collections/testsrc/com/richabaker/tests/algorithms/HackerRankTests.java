@@ -10,8 +10,8 @@ public class HackerRankTests implements Test
     private int testFunction(String a, String b)
     {
         Map<Character, Integer> aMap, bMap;
-        aMap = new HashMap<Character, Integer>();
-        bMap = new HashMap<Character, Integer>();
+        aMap = new HashMap<>();
+        bMap = new HashMap<>();
         for (char aChar: a.toCharArray())
         {
             if (aMap.containsKey(aChar))
@@ -37,9 +37,7 @@ public class HackerRankTests implements Test
         Set<Character> aKeySet = aMap.keySet();
         Set<Character> bKeySet = bMap.keySet();
 
-
         int totalDeletes = 0;
-
         for (Character aChar: aKeySet)
         {
             int deletes = 0;
@@ -56,7 +54,6 @@ public class HackerRankTests implements Test
                         deletes = bOccurances - aOccurances;
                 }
             }
-
             else
             {
                 deletes = aOccurances;
@@ -68,13 +65,12 @@ public class HackerRankTests implements Test
         {
             totalDeletes += bMap.get(bChar);
         }
-
-            return totalDeletes;
+        return totalDeletes;
     }
 
     private int testFunction2(String a, String b)
     {
-        int charsA[]  = new int[26];
+        int[] charsA  = new int[26];
 
         for (char aChar: a.toCharArray())
             charsA[aChar - 'a']++;
@@ -86,11 +82,11 @@ public class HackerRankTests implements Test
                 System.out.print(";" + (char)(letter + 'a') + ": " + i);
             letter++;
         }
+        System.out.println();
 
-        // -------------------------
         Map<Character, Integer> aMap, bMap;
-        aMap = new HashMap<Character, Integer>();
-        bMap = new HashMap<Character, Integer>();
+        aMap = new HashMap<>();
+        bMap = new HashMap<>();
         for (char aChar: a.toCharArray())
         {
             if (aMap.containsKey(aChar))
@@ -116,9 +112,7 @@ public class HackerRankTests implements Test
         Set<Character> aKeySet = aMap.keySet();
         Set<Character> bKeySet = bMap.keySet();
 
-
         int totalDeletes = 0;
-
         for (Character aChar: aKeySet)
         {
             int deletes = 0;
@@ -135,7 +129,6 @@ public class HackerRankTests implements Test
                         deletes = bOccurances - aOccurances;
                 }
             }
-
             else
             {
                 deletes = aOccurances;
@@ -147,7 +140,6 @@ public class HackerRankTests implements Test
         {
             totalDeletes += bMap.get(bChar);
         }
-
         return totalDeletes;
     }
 
@@ -165,7 +157,7 @@ public class HackerRankTests implements Test
         System.out.println(Arrays.toString(array1));
         System.out.println(Arrays.toString(array2));
 
-        int[] newArray = new int[array1.length * 2];
+        int[] newArray = new int[array1.length + array2.length];
         int a = 0;
         int b = 0;
         int c = 0;
@@ -192,7 +184,13 @@ public class HackerRankTests implements Test
         }
 
         System.out.println("Result is:" + Arrays.toString(newArray));
-        return (newArray[(newArray.length / 2) - 1] + newArray[newArray.length / 2]) / 2;
+        if (c == 0)
+            return 0;
+        if (c == 1)
+            return newArray[0];
+        if (c % 2 == 1)
+            return newArray[c / 2];
+        return (newArray[(c / 2) - 1] + newArray[(c / 2)]) / 2;
     }
 
     @Test
@@ -200,28 +198,17 @@ public class HackerRankTests implements Test
     {
         try
         {
-            int b[] = new int[]{1, 2, 3, 4, 5};
-            int c[] = new int[0];
-
-            //a[0] = 1;
-            //a[1] = 12;
-            //a[2] = 15;
-            //a[3] = 26;
-            //a[4] = 38;
-
-            int a[] = new int[]{6, 7, 8, 9, 10};
-            //b[0] = 2;
-            //b[1] = 13;
-            //b[2] = 17;
-            //b[3] = 30;
-            //b[4] = 45;
+            int[] b = new int[]{1, 12, 15, 26, 38};
+            int[] c = new int[0];
+            int[] a = new int[]{2, 13, 17, 30, 45};
             int median = getMedian(a, b);
             System.out.println("Median is: " + median);
+            assert median == 16;
 
             System.out.println("c length is: " + c.length);
             median = getMedian(c, c);
             System.out.println("Median is: " + median);
-
+            assert median == 0;
         }
         catch (Exception e)
         {

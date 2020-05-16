@@ -1,5 +1,4 @@
-package collections.linkedlist;
-import com.richabaker.collections.linkedlist.RichLinkedList;
+package com.richabaker.collections.lists;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
@@ -12,28 +11,33 @@ public class RichLinkedListTests implements Test
     @Test
     public void test()
     {
-        RichLinkedList<String> list = new RichLinkedList<String>();
+        RichLinkedList<String> list = new RichLinkedList<>();
         list.add("Rich");
         list.add("Deb");
         Iterator<String> itor = list.iterator();
         System.out.println(itor.next());
         System.out.println(itor.next());
 
-        List<String> list2 = new ArrayList<String>();
-        for (String str : list2)
+        List<String> list2 = new ArrayList<>();
+        list2.add("Rich");
+        list2.add("Deb");
+        for (String name : list2)
         {
-
+            System.out.println(name);
         }
 
-        //for (String name:list)
-        //{
-        //    System.out.println(name);
-        //}
+        for (String name:list)
+        {
+            System.out.println(name);
+        }
 
         for (Iterator<String> itor2 = list.iterator(); itor2.hasNext(); )
         {
             System.out.println(itor2.next());
         }
+        assert(list.toString().equals("{Rich, Deb}"));
+        list.reverse();
+        assert(list.toString().equals("{Deb, Rich}"));
     }
 
     @Override

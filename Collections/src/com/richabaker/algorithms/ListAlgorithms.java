@@ -7,15 +7,8 @@ import java.util.List;
 public class ListAlgorithms
 {
     public static void ransomNote(String[] magazine, String[] note) {
-        List<String> magazineList = new ArrayList<String>(Arrays.asList(magazine));
-        List<String> noteList = new ArrayList<String>(Arrays.asList(note));
-
-        //for (String word : magazine)
-        //    magazineList.add(word);
-        //for (String word : note)
-        //    noteList.add(word);
-       // magazineList = Arrays.asList(magazine);
-        //noteList = Arrays.asList(note);
+        List<String> magazineList = new ArrayList<>(Arrays.asList(magazine));
+        List<String> noteList = new ArrayList<>(Arrays.asList(note));
 
         boolean found = true;
         for (String noteWord : noteList)
@@ -30,13 +23,9 @@ public class ListAlgorithms
                 break;
             }
         }
-        if (found == true)
+        if (found)
             System.out.print("Yes");
         else
             System.out.print("No");
-
-
-
     }
-
 }
