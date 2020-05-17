@@ -1,6 +1,6 @@
 package com.richabaker.collections.trees;
 
-public class BinarySearchTree<K extends Comparable<K>, V>
+public class RichBinarySearchTree<K extends Comparable<K>, V>
 {
     private class Node
     {
@@ -33,17 +33,13 @@ public class BinarySearchTree<K extends Comparable<K>, V>
         if (key.compareTo(node.key) <= 0)
         {
             if (node.left == null)
-            {
                 node.left = new Node(key, value);
-            }
             else
                 insert(node.left, key, value);
         } else
         {
             if (node.right == null)
-            {
                 node.right = new Node(key, value);
-            }
             else
                 insert(node.right, key, value);
         }

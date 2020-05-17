@@ -1,7 +1,7 @@
 package com.richabaker.tests.algorithms;
 
 import com.richabaker.algorithms.MergeSortAlgorithms;
-import com.richabaker.collections.trees.BinarySearchTree;
+import com.richabaker.collections.trees.RichBinarySearchTree;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class BinarySearchTests implements Test
 {
-    private BinarySearchTree<String, String> tree = new BinarySearchTree<>();
+    private RichBinarySearchTree<String, String> tree = new RichBinarySearchTree<>();
 
     @Test
     public void BinarySearchTreeTests()

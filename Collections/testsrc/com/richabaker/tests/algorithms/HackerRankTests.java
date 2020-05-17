@@ -68,22 +68,29 @@ public class HackerRankTests implements Test
         return totalDeletes;
     }
 
-    private int testFunction2(String a, String b)
+    // determine the number of occurances of the characters a-z in a string
+    private String testFunction2(String a, String b)
     {
-        int[] charsA  = new int[26];
+        int[] charsA = new int[26];
 
-        for (char aChar: a.toCharArray())
+        for (char aChar : a.toCharArray())
             charsA[aChar - 'a']++;
 
         int letter = 0;
-        for (int i : charsA)
-        {
-            if (i > 0)
-                System.out.print(";" + (char)(letter + 'a') + ": " + i);
+        String occurances = "";
+        for (int i : charsA) {
+            if (i > 0) {
+                System.out.print(";" + (char) (letter + 'a') + ": " + i);
+                occurances = occurances + ";" + (char) (letter + 'a') + ": " + i;
+            }
             letter++;
         }
         System.out.println();
+        return occurances;
+    }
 
+    private int testFunction3(String a, String b)
+    {
         Map<Character, Integer> aMap, bMap;
         aMap = new HashMap<>();
         bMap = new HashMap<>();
@@ -146,13 +153,13 @@ public class HackerRankTests implements Test
     @Test
     public void HackerRankTest()
     {
-        int a = testFunction("fcrxzwscanmligyxyvym", "jxwtrhvujlmrpdoqbisbwhmgpmeoke");
+        int a = testFunction3("fcrxzwscanmligyxyvym", "jxwtrhvujlmrpdoqbisbwhmgpmeoke");
         System.out.println(a);
 
-        int b = testFunction2("fcrxzwscanmligyxyvym", "jxwtrhvujlmrpdoqbisbwhmgpmeoke");
+        int b = testFunction3("fcrxzwscanmligyxyvym", "jxwtrhvujlmrpdoqbisbwhmgpmeoke");
     }
 
-    int getMedian(int[] array1, int[] array2)
+    private int getMedian(int[] array1, int[] array2)
     {
         System.out.println(Arrays.toString(array1));
         System.out.println(Arrays.toString(array2));
@@ -198,9 +205,10 @@ public class HackerRankTests implements Test
     {
         try
         {
-            int[] b = new int[]{1, 12, 15, 26, 38};
+            int[] a = new int[] {2, 13, 17, 30, 45};
+            int[] b = new int[] {1, 12, 15, 26, 38};
             int[] c = new int[0];
-            int[] a = new int[]{2, 13, 17, 30, 45};
+
             int median = getMedian(a, b);
             System.out.println("Median is: " + median);
             assert median == 16;
