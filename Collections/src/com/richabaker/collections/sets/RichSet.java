@@ -1,5 +1,5 @@
 package com.richabaker.collections.sets;
 
-public interface RichSet
+public interface RichSet<T>
 {
 }

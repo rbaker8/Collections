@@ -1,4 +1,27 @@
 package com.richabaker.tests.collections;
 
-public class QueueTests {
+import org.junit.Test;
+
+import java.lang.annotation.Annotation;
+
+public class QueueTests implements Test
+{
+    @Override
+    public Class<? extends Throwable> expected()
+    {
+        return null;
+    }
+
+    @Override
+    public long timeout()
+    {
+        return 0;
+    }
+
+    @Override
+    public Class<? extends Annotation> annotationType()
+    {
+        return null;
+    }
+
 }

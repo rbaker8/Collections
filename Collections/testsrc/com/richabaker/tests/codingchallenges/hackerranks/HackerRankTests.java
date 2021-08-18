@@ -15,7 +15,7 @@ public class HackerRankTests implements Test
     }
 
     @Test
-    public void testCodeChef()
+    public void testHackerRanks()
     {
 
     }
