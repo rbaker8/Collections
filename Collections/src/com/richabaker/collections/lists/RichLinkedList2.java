@@ -1,6 +1,4 @@
-package com.richabaker.collections.linkedlist;
-
-import com.richabaker.collections.lists.RichList;
+package com.richabaker.collections.lists;
 
 import java.util.Iterator;
 
@@ -57,17 +55,19 @@ public class RichLinkedList2<T> implements Iterable<T>, RichList<T>
         }
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new RichLinkedListIterator();
+        return new RichLinkedList2.RichLinkedListIterator();
     }
 
-    public void add(T data)
+    @Override
+    public boolean add(T data)
     {
         if (head == null)
         {
             head = new RichListNode(data);
-            return;
+            return true;
         }
         RichListNode pos = head;
         while (pos.next != null)
@@ -75,10 +75,22 @@ public class RichLinkedList2<T> implements Iterable<T>, RichList<T>
             pos = pos.next;
         }
         pos.next = new RichListNode(data);
+        return true;
     }
 
+    @Override
     public void reverse()
     {
-
+        RichListNode prev = null;
+        RichListNode next;
+        RichListNode n = head;
+        while (n != null)
+        {
+            next = n.next;
+            n.next = prev;
+            prev = n;
+            n = next;
+        }
+        head = prev;
     }
 }

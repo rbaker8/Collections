@@ -15,11 +15,7 @@ public class RichArrayStack<E> implements RichGenericStack<E>
         capacity = INITIAL_SIZE;
     }
 
-    /**
-     * Push implements LIFO insertion.
-     * @param o the object to be stored.  This becomes the top element of the stack.
-     */
-    public <T extends E>void push(T o)
+    private void checkCapacity()
     {
         if (size == capacity)
         {
@@ -29,8 +25,16 @@ public class RichArrayStack<E> implements RichGenericStack<E>
             //Arrays.cop
             items = newItems;
         }
-        items[size++] = o;
+    }
 
+    /**
+     * Push implements LIFO insertion.
+     * @param o the object to be stored.  This becomes the top element of the stack.
+     */
+    public <T extends E>void push(T o)
+    {
+        checkCapacity();
+        items[size++] = o;
     }
 
     /**
@@ -42,7 +46,7 @@ public class RichArrayStack<E> implements RichGenericStack<E>
         if (size == 0)
             return null;
         else
-            return items[size--];
+            return items[--size];
 
     }
 

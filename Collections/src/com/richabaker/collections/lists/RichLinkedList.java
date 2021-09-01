@@ -14,7 +14,8 @@ public class RichLinkedList<T> implements RichList<T>
     private Node tail;
     private int length;
 
-    public void add(T value)
+    @Override
+    public boolean add(T value)
     {
 
         Node n = new Node();
@@ -23,7 +24,7 @@ public class RichLinkedList<T> implements RichList<T>
         if (head == null)
         {
             head = n;
-            return;
+            return true;
         }
         length++;
         Node iter = head;
@@ -32,6 +33,8 @@ public class RichLinkedList<T> implements RichList<T>
             iter = iter.next;
         }
         iter.next = n;
+
+        return true;
     }
 
     public void reverse()
@@ -104,35 +107,5 @@ public class RichLinkedList<T> implements RichList<T>
     public Iterator<T> iterator()
     {
         return new RichLinkedListIterator();
-        /*
-        return new Iterator<T>()
-        {
-            RichListNode<T> pos;
-            public boolean hasNext()
-            {
-                if (head == null)
-                    return false;
-                if (pos == null)
-                    return false;
-                return pos.next != null;
-            }
-            public T next()
-            {
-                if (head == null)
-                    return null;
-               if (pos == null)
-              {
-                    pos = head;
-                    return head.data;
-                }
-                if (pos.next != null)
-                {
-                    pos = pos.next;
-                    return pos.data;
-                }
-                else
-                    return null;
-            }
-        };*/
     }
 }

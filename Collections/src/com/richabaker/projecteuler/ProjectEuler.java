@@ -21,9 +21,23 @@ public class ProjectEuler
         1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 
     By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms. */
+
     public int evenFibonacciNumbers()
     {
-        return 0;
+        int sum = 0;
+        int prev1 = 2;
+        int prev2 = 1;
+        int term = 0;
+
+        while (term <= 4000000)
+        {
+            term = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = term;
+            if (term % 2 == 0 && term <= 4000000)
+                sum += term;
+        }
+        return sum + 2;
     }
 
     /* Problem 3: The prime factors of 13195 are 5, 7, 13 and 29.

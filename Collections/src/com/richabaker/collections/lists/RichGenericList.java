@@ -1,27 +1,33 @@
 package com.richabaker.collections.lists;
 
-public interface RichList<T> extends Iterable<T>
+import java.util.Iterator;
+
+public interface RichGenericList<T> extends Iterable<T>
 {
-    boolean add(T value);
     void reverse();
 
-    /*
+
     int size();
 
     boolean isEmpty();
+
 
     boolean contains(Object o);
 
     Iterator<T> iterator();
 
+    /*
     Object[] toArray();
 
     <T1> T1[] toArray(T1[] a);
+
+    */
 
     boolean add(T t);
 
     boolean remove(Object o);
 
+    /*
     boolean containsAll(Collection<?> c);
 
     boolean addAll(Collection<? extends T> c);
@@ -31,6 +37,7 @@ public interface RichList<T> extends Iterable<T>
     boolean removeAll(Collection<?> c);
 
     boolean retainAll(Collection<?> c);
+    */
 
     void clear();
 
@@ -44,6 +51,7 @@ public interface RichList<T> extends Iterable<T>
 
     int indexOf(Object o);
 
+    /*
     int lastIndexOf(Object o);
 
     ListIterator<T> listIterator();

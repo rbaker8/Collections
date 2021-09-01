@@ -1,6 +1,6 @@
-package com.richabaker.tests.codechef;
+package com.richabaker.tests.codingchallenges.codechef;
 
-import com.richabaker.codechef.CodeChef;
+import com.richabaker.codingchallenges.codechef.CodeChef;
 import org.junit.Test;
 import java.lang.annotation.Annotation;
 

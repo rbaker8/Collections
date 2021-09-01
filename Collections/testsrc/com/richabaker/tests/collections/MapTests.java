@@ -1,11 +1,19 @@
 package com.richabaker.tests.collections;
 
+import com.richabaker.collections.maps.RichHashMap;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
 
 public class MapTests implements Test
 {
+
+    @Test
+    public void testRichHashMap()
+    {
+        RichHashMap<Character, Integer> map = new RichHashMap<>();
+    }
+
     @Override
     public Class<? extends Throwable> expected()
     {

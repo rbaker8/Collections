@@ -1,4 +1,5 @@
-package com.richabaker.tests.projecteuler;
+package com.richabaker.tests.codingchallenges.proejecteuler;
+
 import com.richabaker.projecteuler.ProjectEuler;
 import org.junit.Test;
 
