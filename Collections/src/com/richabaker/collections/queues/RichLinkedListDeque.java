@@ -37,7 +37,7 @@ public class RichLinkedListDeque<E> extends RichLinkedListQueue<E> implements Ri
             return;
         }
         length++;
-        Node next = head.next;
+        Node next = head;
         head = new Node();
         head.value = e;
         head.next = next;
@@ -127,7 +127,8 @@ public class RichLinkedListDeque<E> extends RichLinkedListQueue<E> implements Ri
     @Override
     public E removeFirst()
     {
-        throw new NoSuchElementException();
+        return remove();
+        //throw new NoSuchElementException();
     }
 
     /**
@@ -342,7 +343,8 @@ public class RichLinkedListDeque<E> extends RichLinkedListQueue<E> implements Ri
     @Override
     public E remove()
     {
-        return null;
+        //throw new NoSuchElementException();
+        return super.remove();
     }
 
     /**
@@ -449,9 +451,9 @@ public class RichLinkedListDeque<E> extends RichLinkedListQueue<E> implements Ri
      */
 
     @Override
-    public void push(E e)
+    public void push(E e) throws IllegalStateException
     {
-
+        addFirst(e);
     }
 
     /**
@@ -468,7 +470,7 @@ public class RichLinkedListDeque<E> extends RichLinkedListQueue<E> implements Ri
     @Override
     public E pop()
     {
-        return null;
+        return removeFirst();
     }
 
 
@@ -522,13 +524,12 @@ public class RichLinkedListDeque<E> extends RichLinkedListQueue<E> implements Ri
     /**
      * Returns the number of elements in this deque.
      *
-     * @return the number of elements in this deque
      */
 
     @Override
     public int size()
     {
-        return 0;
+        return super.size();
     }
 
     /**
@@ -558,4 +559,15 @@ public class RichLinkedListDeque<E> extends RichLinkedListQueue<E> implements Ri
     //{
     //    return null;
     //}
+
+    // empty the queue
+    @Override
+    public void clear()
+    {
+        head = null;
+        tail = null;
+        prevTail = null;
+        length = 0;
+    }
+
 }

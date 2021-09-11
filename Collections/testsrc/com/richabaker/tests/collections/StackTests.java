@@ -6,6 +6,7 @@ import com.richabaker.collections.stacks.RichLinkedListStack;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
+import java.util.NoSuchElementException;
 
 public class StackTests implements Test
 {
@@ -41,22 +42,29 @@ public class StackTests implements Test
     @Test
     public void linkedListStackTests()
     {
-        linkedListStack.push("a");
-        linkedListStack.push("b");
-        linkedListStack.push("c");
-        assert linkedListStack.pop().equals("c");
-        assert linkedListStack.pop().equals("b");
-        assert linkedListStack.pop().equals("a");
+            linkedListStack.push("a");
+            linkedListStack.push("b");
+            linkedListStack.push("c");
+            assert linkedListStack.pop().equals("c");
+            assert linkedListStack.pop().equals("b");
+            assert linkedListStack.pop().equals("a");
 
-        linkedListStack.push("a");
-        linkedListStack.push("b");
-        linkedListStack.push("c");
-        assert linkedListStack.size() == 3;
+            linkedListStack.push("a");
+            linkedListStack.push("b");
+            linkedListStack.push("c");
+            assert linkedListStack.size() == 3;
 
-        linkedListStack.clear();
-        assert linkedListStack.size() == 0;
+            linkedListStack.clear();
+            assert linkedListStack.size() == 0;
 
-        assert linkedListStack.pop() == null;
+            try
+            {
+                linkedListStack.pop();
+            }
+            catch (NoSuchElementException e)
+            {
+
+            }
     }
 
     @Override

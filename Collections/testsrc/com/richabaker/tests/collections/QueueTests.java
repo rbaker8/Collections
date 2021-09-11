@@ -1,6 +1,7 @@
 package com.richabaker.tests.collections;
 
 import com.richabaker.collections.queues.RichArrayQueue;
+import com.richabaker.collections.queues.RichGenericQueue;
 import com.richabaker.collections.queues.RichLinkedListQueue;
 import org.junit.Test;
 
@@ -11,13 +12,30 @@ public class QueueTests implements Test
     @Test
     public void testRichArrayQueue()
     {
-        RichArrayQueue<String> queue = new RichArrayQueue<>(100);
+        try
+        {
+            RichGenericQueue<String> queue = new RichArrayQueue<>(100);
+            queue.add("Deb");
+            queue.add("Rich");
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     @Test
     public void testRichLinkedListQueue()
+
     {
-        RichLinkedListQueue<String> queue = new RichLinkedListQueue<>();
+        try
+        {
+            RichLinkedListQueue<String> queue = new RichLinkedListQueue<>();
+            queue.add("Deb");
+            queue.add("Rich");
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     @Override

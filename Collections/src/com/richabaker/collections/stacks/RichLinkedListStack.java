@@ -32,6 +32,7 @@ public class RichLinkedListStack<E> extends RichLinkedListDeque<E> implements Ri
     public boolean add(E e)
     {
         super.addFirst(e);
+        return true;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class RichLinkedListStack<E> extends RichLinkedListDeque<E> implements Ri
     @Override
     public void clear()
     {
-        super.
+        super.clear();
     }
     //private RichLinkedListDeque<E> deque = new RichLinkedListDeque<E>();
 
@@ -70,7 +71,7 @@ public class RichLinkedListStack<E> extends RichLinkedListDeque<E> implements Ri
     @Override
     public E pop()
     {
-        return null;
+        return super.removeFirst();
     }
 
     /**

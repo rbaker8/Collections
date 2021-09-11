@@ -1,7 +1,5 @@
 package com.richabaker.collections.queues;
 
-import com.richabaker.collections.lists.RichLinkedList;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -12,6 +10,10 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
         {
                 E value;
                 Node next;
+                Node ()
+                {
+
+                }
         }
 
         protected Node head = null;
@@ -40,7 +42,8 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
         @Override
         public boolean add(E e)
         {
-                RichLinkedListQueue.Node n = new RichLinkedListQueue.Node();
+                //RichLinkedListQueue.Node<E> n = new RichLinkedListQueue<E>.Node();
+                Node n = new Node();
                 n.value = e;
                 n.next = null;
                 tail = n;
@@ -50,14 +53,14 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
                         head = n;
                         return true;
                 }
-                RichLinkedListQueue.Node iter = head;
+                //RichLinkedListQueue.Node<E> iter = head;
+                Node iter = head;
                 while (iter != null)
                 {
                         prevTail = iter;
                         iter = iter.next;
                 }
                 prevTail.next = n;
-                tail = n;
                 return true;
 
         }
@@ -156,16 +159,26 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
             return true;
         }
 
-        // Size of the array
+        // Size of the queue
         @Override
         public int size()
         {
             return length;
         }
 
-        public class RichLinkedListQueueIterator<E> implements Iterator<E>
+        // empty the queue
+        @Override
+        public void clear()
         {
-                private RichLinkedListQueue.Node pos;
+                head = null;
+                tail = null;
+                prevTail = null;
+                length = 0;
+        }
+
+        private class RichLinkedListQueueIterator implements Iterator<E>
+        {
+                private Node pos;
 
                 public RichLinkedListQueueIterator()
                 {
@@ -176,8 +189,8 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
                 {
                         if (head == null)
                                 return false;
-                        if (pos == null)
-                                return true;
+                        //if (pos == null)
+                        //        return false;
                         return pos.next != null;
                 }
 
@@ -191,7 +204,7 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
                         if (hasNext())
                         {
                                 pos = pos.next;
-                                return (E) pos.value;
+                                return (E)pos.value;
                         }
                         else
                                 return null;

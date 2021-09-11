@@ -82,7 +82,9 @@ public interface RichGenericQueue<E> extends Iterable<E>
 
     boolean isEmpty();
 
-    // Size of the array
+    // Size of the queue
      int size();
+
+     void clear();
 }
 

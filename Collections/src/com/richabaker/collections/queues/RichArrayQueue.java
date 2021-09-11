@@ -149,6 +149,20 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
+
+    // empty the queue
+    @Override
+    public void clear()
+    {
+        // Initial Size of Buffer
+        size = 0;
+        // Head pointer
+        head = 0;
+        // Tail pointer
+        tail = -1;
+        array = null;
+    }
+
     /*
     @Override
     public E remove()
