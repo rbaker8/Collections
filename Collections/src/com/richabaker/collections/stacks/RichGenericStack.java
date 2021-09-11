@@ -1,12 +1,14 @@
 package com.richabaker.collections.stacks;
 
-public interface RichGenericStack<E>
+import com.richabaker.collections.queues.RichDeque;
+
+public interface RichGenericStack<E> extends RichDeque<E>
 {
     /**
      * Push implements LIFO insertion.
      * @param o the object to be stored.  This becomes the top element of the stack.
      */
-    <T extends E>void push(T o);
+    //<T extends E>void push(T o);
 
     /**
      * Pop implements LIFO retrieval.  Pop returns the top element of the stack, and removes it from the stack.
@@ -18,7 +20,7 @@ public interface RichGenericStack<E>
      * returns the number of elements on the stack
      * @return the number of elements on the stack.
      */
-    int getSize();
+    int size();
 
     /**
      * Empties the stack.  After a call to clear(), getSize() returns 0, and pop returns null.

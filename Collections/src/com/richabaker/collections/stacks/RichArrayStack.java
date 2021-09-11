@@ -1,26 +1,29 @@
 package com.richabaker.collections.stacks;
 
-import java.util.Arrays;
+import com.richabaker.collections.lists.RichArrayList;
 
-public class RichArrayStack<E> implements RichGenericStack<E>
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class RichArrayStack<E> extends RichArrayList<E> implements RichGenericStack<E>
 {
     private E[] items;
     private int size = 0;
     private static final int INITIAL_SIZE = 1;
+    private static final int GROWTH_FACTOR = 100;
     private int capacity;
 
     public RichArrayStack()
     {
-        items = (E[])new Object[INITIAL_SIZE];
+        items = (E[]) new Object[INITIAL_SIZE];
         capacity = INITIAL_SIZE;
     }
 
     private void checkCapacity()
     {
-        if (size == capacity)
-        {
-            capacity += INITIAL_SIZE;
-            E[] newItems = (E[])new Object[capacity];
+        if (size == capacity) {
+            capacity += GROWTH_FACTOR;
+            E[] newItems = (E[]) new Object[capacity];
             newItems = Arrays.copyOf(items, capacity);
             //Arrays.cop
             items = newItems;
@@ -29,9 +32,10 @@ public class RichArrayStack<E> implements RichGenericStack<E>
 
     /**
      * Push implements LIFO insertion.
+     *
      * @param o the object to be stored.  This becomes the top element of the stack.
      */
-    public <T extends E>void push(T o)
+    public void push(E o)
     {
         checkCapacity();
         items[size++] = o;
@@ -39,6 +43,7 @@ public class RichArrayStack<E> implements RichGenericStack<E>
 
     /**
      * Pop implements LIFO retrieval.  Pop returns the top element of the stack, and removes it from the stack.
+     *
      * @return the top element of the stack, or null if the stack is empty.
      */
     public E pop()
@@ -50,11 +55,67 @@ public class RichArrayStack<E> implements RichGenericStack<E>
 
     }
 
+    public E remove()
+    {
+        return pop();
+    }
+
+    public E removeFirst()
+    {
+        return null;
+    }
+
+    public E removeLast()
+    {
+        return null;
+    }
+
+    public boolean offerFirst(E e)
+    {
+        return false;
+    }
+
+    public boolean offerLast(E e)
+    {
+        return false;
+    }
+
+    public void addFirst(E e)
+    {
+
+    }
+
+    public void addLast(E e)
+    {
+
+    }
+
+    public boolean offer(E e)
+    {
+        return false;
+    }
+
+    public E peek()
+    {
+        return null;
+    }
+
+    public E element()
+    {
+        return null;
+    }
+
+    public E poll()
+    {
+        return null;
+    }
+
     /**
      * returns the number of elements on the stack
      * @return the number of elements on the stack.
      */
-    public int getSize()
+
+    public int size()
     {
         return size;
     }
@@ -64,7 +125,13 @@ public class RichArrayStack<E> implements RichGenericStack<E>
      */
     public void clear()
     {
-        size=0;
+        size = 0;
+    }
+
+    @Override
+    public Iterator<E> iterator()
+    {
+        return null;
     }
 
 }

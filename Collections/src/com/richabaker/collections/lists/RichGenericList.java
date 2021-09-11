@@ -6,11 +6,9 @@ public interface RichGenericList<T> extends Iterable<T>
 {
     void reverse();
 
-
     int size();
 
     boolean isEmpty();
-
 
     boolean contains(Object o);
 

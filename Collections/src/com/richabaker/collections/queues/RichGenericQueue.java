@@ -3,7 +3,7 @@ package com.richabaker.collections.queues;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public interface RichGenericQueue<E>
+public interface RichGenericQueue<E> extends Iterable<E>
 
 {
     /**

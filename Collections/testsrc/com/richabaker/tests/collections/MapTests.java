@@ -8,6 +8,11 @@ import java.lang.annotation.Annotation;
 public class MapTests implements Test
 {
 
+    public MapTests()
+    {
+
+    }
+
     @Test
     public void testRichHashMap()
     {

@@ -14,11 +14,39 @@ import java.util.List;
 
 public class ListTests implements Test
 {
+/*
+    void reverse();
+
+    int size();
+
+    boolean isEmpty();
+
+    boolean contains(Object o);
+
+    Iterator<T> iterator();
+
+    boolean add(T t);
+
+    boolean remove(Object o);
+
+    void clear();
+
+    T get(int index);
+
+    T set(int index, T element);
+
+    void add(int index, T element);
+
+    T remove(int index);
+
+    int indexOf(Object o);
+*/
+
 
     @Test
     public void testRichLinkedList()
     {
-        RichList<String> list = new RichLinkedList<>();
+        RichGenericList<String> list = new RichLinkedList<String>();
         list.add("Rich");
         list.add("Deb");
         Iterator<String> itor = list.iterator();
@@ -45,6 +73,32 @@ public class ListTests implements Test
         assert(list.toString().equals("{Rich, Deb}"));
         list.reverse();
         assert(list.toString().equals("{Deb, Rich}"));
+        list.reverse();
+
+        int count = 1;
+        for (Iterator<String> itor2 = list.iterator(); itor2.hasNext(); )
+        {
+            String name = itor2.next();
+            if (count == 1)
+                assert name.equals("Rich");
+
+            if (count == 2)
+                assert name.equals("Deb");
+            System.out.println(name);
+            count++;
+        }
+
+        assert list.indexOf("Rich") == 0;
+        assert list.indexOf("Deb") == 1;
+
+        assert list.contains("Deb") == true;
+        assert list.contains("joo") == false;
+
+        assert list.remove("Joe") == false;
+        assert list.remove("Rich") == true;
+        assert list.size() == 1;
+        assert list.remove("Deb") == true;
+        assert list.size() == 0;
     }
 
 

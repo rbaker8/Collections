@@ -1,11 +1,16 @@
 package com.richabaker.collections.queues;
 
+import com.richabaker.collections.lists.RichArrayList;
+
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RichArrayQueue<E> implements RichGenericQueue<E>
 {
     // Initial Capacity of Buffer
     private int capacity = 0;
+    // growth factor
+    private static final int GROWTH_FACTOR = 100;
     // Initial Size of Buffer
     private int size = 0;
     // Head pointer
@@ -189,4 +194,33 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
         return null;
     }
     */
+
+    @Override
+    public Iterator<E> iterator()
+    {
+        return new RichArrayQueue.RichArrayQueueIterator();
+    }
+
+    private class RichArrayQueueIterator implements Iterator<E>
+    {
+        private int pos = 0;
+
+        public RichArrayQueueIterator()
+        {
+            pos = 0;
+        }
+
+        public boolean hasNext()
+        {
+            if (pos < size)
+                return true;
+            else
+                return false;
+        }
+
+        public E next()
+        {
+            return array[pos++];
+        }
+    }
 }

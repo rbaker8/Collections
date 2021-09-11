@@ -30,10 +30,10 @@ public class StackTests implements Test
        arrayStack.push("a");
        arrayStack.push("b");
        arrayStack.push("c");
-       assert arrayStack.getSize() == 3;
+       assert arrayStack.size() == 3;
 
        arrayStack.clear();
-       assert arrayStack.getSize() == 0;
+       assert arrayStack.size() == 0;
 
        assert arrayStack.pop() == null;
     }
@@ -51,10 +51,10 @@ public class StackTests implements Test
         linkedListStack.push("a");
         linkedListStack.push("b");
         linkedListStack.push("c");
-        assert linkedListStack.getSize() == 3;
+        assert linkedListStack.size() == 3;
 
         linkedListStack.clear();
-        assert linkedListStack.getSize() == 0;
+        assert linkedListStack.size() == 0;
 
         assert linkedListStack.pop() == null;
     }
