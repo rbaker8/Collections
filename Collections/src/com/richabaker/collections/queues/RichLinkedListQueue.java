@@ -156,7 +156,7 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
         @Override
         public boolean isEmpty()
         {
-            return true;
+            return length == 0;
         }
 
         // Size of the queue
@@ -199,12 +199,12 @@ public class RichLinkedListQueue<E> implements RichGenericQueue<E>
                         if (pos == null)
                         {
                                 pos = head;
-                                return (E) head.value;
+                                return head.value;
                         }
                         if (hasNext())
                         {
                                 pos = pos.next;
-                                return (E)pos.value;
+                                return pos.value;
                         }
                         else
                                 return null;

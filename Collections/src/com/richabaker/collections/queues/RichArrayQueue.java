@@ -1,49 +1,84 @@
 package com.richabaker.collections.queues;
 
-import com.richabaker.collections.lists.RichArrayList;
-
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RichArrayQueue<E> implements RichGenericQueue<E>
 {
     // Initial Capacity of Buffer
-    private int capacity = 0;
+    protected int capacity;
+    private static final int INITIAL_CAPACITY = 100;
     // growth factor
     private static final int GROWTH_FACTOR = 100;
     // Initial Size of Buffer
-    private int size = 0;
+    protected int size = 0;
     // Head pointer
-    private int head = 0;
+    protected int head = 0;
     // Tail pointer
-    private int tail = -1;
-    private E[] array;
+    protected int tail = -1;
+    protected E[] array;
 
-    // Constructor
+    // Constructors
+
+    public RichArrayQueue()
+    {
+        // Initializing the capacity of the array
+        this.capacity = INITIAL_CAPACITY;
+        init();
+    }
+
     public RichArrayQueue(int capacity)
     {
         // Initializing the capacity of the array
         this.capacity = capacity;
+        init();
+    }
+
+    protected void init()
+    {
 
         // Initializing the array
-        array = (E[]) new Object[capacity];
+        array = (E[]) new Object[this.capacity];
+        size = 0;
+        // Head pointer
+        head = 0;
+        // Tail pointer
+        tail = -1;
+    }
+
+    protected void checkCapacity()
+    {
+        if (size == capacity)
+        {
+            capacity += GROWTH_FACTOR;
+            E[] newItems;// = (E[])new Object[capacity];
+            newItems = Arrays.copyOf(array, capacity);
+            //Arrays.cop
+            array = newItems;
+        }
     }
 
     // Addition of elements
     @Override
     public boolean add(E element) throws Exception
     {
-
-        // Calculating the index to add the element
-        int index = (tail + 1) % capacity;
+        if (element == null)
+            throw new NullPointerException();
 
         // Size of the array increases as elements are added
         size++;
 
+        //checkCapacity();
+
         // Checking if the array is full
-        if (size == capacity) {
+        if (size > capacity)
+        {
             throw new Exception("Buffer Overflow");
         }
+
+        // Calculating the index to add the element
+        int index = (tail + 1) % capacity;
 
         // Storing the element in the array
         array[index] = element;
@@ -71,6 +106,9 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
         // Getting the element
         E element = array[index];
 
+        // don't store a reference to the element anymore, so it can get garbage collected
+        array[index] = null;
+
         // Incrementing the head pointer to point
         // to the next element
         head++;
@@ -83,14 +121,20 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
         return element;
     }
 
-    // Retrieving the first element without deleting it
+    /**
+     * Retrieves, but does not remove, the head of this queue,
+     * or returns {@code null} if this queue is empty.
+     *
+     * @return the head of this queue, or {@code null} if this queue is empty
+     */
+
     @Override
     public E peek() throws Exception
     {
 
         // Checking if the array is empty
         if (size == 0) {
-            throw new Exception("Empty Buffer");
+            return null;
         }
 
         // Calculating the index of the
@@ -136,9 +180,20 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
      *         prevents it from being added to this queue
      */
     @Override
-    public boolean offer(E e)
+    public boolean offer(E e) throws Exception
     {
-        return false;
+        if (e == null)
+            throw new NullPointerException();
+        if (size == capacity)
+            return false;
+        return add(e);
+    }
+
+    // empty the queue
+    @Override
+    public void clear()
+    {
+        init();
     }
 
     /**
@@ -150,26 +205,16 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
      * @throws NoSuchElementException if this queue is empty
      */
 
-    // empty the queue
-    @Override
-    public void clear()
-    {
-        // Initial Size of Buffer
-        size = 0;
-        // Head pointer
-        head = 0;
-        // Tail pointer
-        tail = -1;
-        array = null;
-    }
-
     /*
     @Override
-    public E remove()
+    public E remove() throws Exception
     {
-        return null;
+        if (size == 0)
+            return new NoSuchElementException();
+        return poll();
     }
     */
+
     /**
      * Retrieves and removes the head of this queue,
      * or returns {@code null} if this queue is empty.
@@ -177,9 +222,11 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
      * @return the head of this queue, or {@code null} if this queue is empty
      */
     @Override
-    public E poll()
+    public E poll() throws Exception
     {
-        return null;
+       if (size == 0)
+           return null;
+       return remove();
     }
 
     /**
@@ -191,33 +238,22 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
      * @throws NoSuchElementException if this queue is empty
      */
     @Override
-    public E element()
+    public E element() throws Exception
     {
+        if (size == 0)
+            throw new NoSuchElementException();
         return null;
     }
-
-    /**
-     * Retrieves, but does not remove, the head of this queue,
-     * or returns {@code null} if this queue is empty.
-     *
-     * @return the head of this queue, or {@code null} if this queue is empty
-     */
-    /*
-    E peek()
-    {
-        return null;
-    }
-    */
 
     @Override
     public Iterator<E> iterator()
     {
-        return new RichArrayQueue.RichArrayQueueIterator();
+        return new RichArrayQueue<E>.RichArrayQueueIterator();
     }
 
     private class RichArrayQueueIterator implements Iterator<E>
     {
-        private int pos = 0;
+        private int pos;
 
         public RichArrayQueueIterator()
         {
@@ -226,10 +262,7 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
 
         public boolean hasNext()
         {
-            if (pos < size)
-                return true;
-            else
-                return false;
+            return pos < size;
         }
 
         public E next()

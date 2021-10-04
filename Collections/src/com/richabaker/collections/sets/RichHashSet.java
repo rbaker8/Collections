@@ -2,14 +2,42 @@ package com.richabaker.collections.sets;
 
 import com.richabaker.collections.maps.RichHashMap;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.Spliterator;
+import java.util.*;
 
-public class RichHashSet<E> implements RichSet<E>
+public class RichHashSet<E> extends RichAbstractSet<E> implements RichSet<E>
 {
     private RichHashMap<E, Object> map = new RichHashMap<E, Object>();
+
+    // Dummy value to associate with an Object in the backing Map
+    private static final Object PRESENT = new Object();
+
+
+    /**
+     * Constructs a new, empty set; the backing {@code HashMap} instance has
+     * the specified initial capacity and the specified load factor.
+     *
+     * @param      initialCapacity   the initial capacity of the hash map
+     * @param      loadFactor        the load factor of the hash map
+     * @throws     IllegalArgumentException if the initial capacity is less
+     *             than zero, or if the load factor is nonpositive
+     */
+    public RichHashSet(int initialCapacity, float loadFactor) {
+        map = new RichHashMap<>(initialCapacity, loadFactor);
+    }
+
+
+    /**
+     * Constructs a new, empty set; the backing {@code HashMap} instance has
+     * the specified initial capacity and default load factor (0.75).
+     *
+     * @param      initialCapacity   the initial capacity of the hash table
+     * @throws     IllegalArgumentException if the initial capacity is less
+     *             than zero
+     */
+    public RichHashSet(int initialCapacity) {
+        map = new RichHashMap<>(initialCapacity);
+    }
+
     /**
      * Returns the number of elements in this set (its cardinality).  If this
      * set contains more than {@code Integer.MAX_VALUE} elements, returns
@@ -19,17 +47,16 @@ public class RichHashSet<E> implements RichSet<E>
      */
     public int size()
     {
-        return 0;
+        return map.size();
     }
 
     /**
      * Returns {@code true} if this set contains no elements.
      *
-     * @return {@code true} if this set contains no elements
      */
     public boolean isEmpty()
     {
-        return true;
+        return map.size() == 0;
     }
 
     /**
@@ -49,7 +76,7 @@ public class RichHashSet<E> implements RichSet<E>
      */
     public boolean contains(Object o)
     {
-        return false;
+        return map.containsKey(o);
     }
 
     /**
@@ -61,7 +88,7 @@ public class RichHashSet<E> implements RichSet<E>
      */
     public Iterator<E> iterator()
     {
-        return null;
+        return map.keySet().iterator();
     }
 
     /**
@@ -167,7 +194,7 @@ public class RichHashSet<E> implements RichSet<E>
      */
     public boolean add(E e)
     {
-        return false;
+        return map.put(e, PRESENT)==null;
     }
 
 
@@ -194,7 +221,7 @@ public class RichHashSet<E> implements RichSet<E>
      */
     public boolean remove(Object o)
     {
-        return false;
+        return map.remove(o)==PRESENT;
     }
 
 
@@ -312,7 +339,7 @@ public class RichHashSet<E> implements RichSet<E>
      */
     public void clear()
     {
-
+        map.clear();
     }
 
     // Comparison and hashing

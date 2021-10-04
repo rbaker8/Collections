@@ -17,6 +17,26 @@ public class MapTests implements Test
     public void testRichHashMap()
     {
         RichHashMap<Character, Integer> map = new RichHashMap<>();
+        map.put('A', 0);
+        map.put('B', 0);
+        map.put('C', 0);
+        map.put('D', 0);
+        map.put('E', 0);
+        map.put('F', 0);
+        map.put('G', 0);
+        map.put('H', 0);
+        assert map.size() == 8;
+        assert map.containsKey('A');
+        assert map.get('A').equals(0);
+        map.put('A', 1);
+        assert map.get('A').equals(1);
+        assert !map.containsKey('I');
+        map.remove('A');
+        assert !map.containsKey('A');
+        assert map.size() == 7;
+        map.clear();
+        assert map.size() == 0;
+        assert !map.containsKey('B');
     }
 
     @Override

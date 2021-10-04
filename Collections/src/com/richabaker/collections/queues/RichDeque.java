@@ -91,7 +91,7 @@ public interface RichDeque<E> extends RichGenericQueue<E>
      * @return the head of this deque
      * @throws NoSuchElementException if this deque is empty
      */
-    E removeFirst();
+    E removeFirst() throws Exception;
 
     /**
      * Retrieves and removes the last element of this deque.  This method
@@ -101,7 +101,7 @@ public interface RichDeque<E> extends RichGenericQueue<E>
      * @return the tail of this deque
      * @throws NoSuchElementException if this deque is empty
      */
-    E removeLast();
+    E removeLast() throws Exception;
 
     /**
      * Retrieves and removes the first element of this deque,
@@ -254,7 +254,7 @@ public interface RichDeque<E> extends RichGenericQueue<E>
      * @return the head of the queue represented by this deque
      * @throws NoSuchElementException if this deque is empty
      */
-    E remove();
+    E remove() throws Exception;
 
     /**
      * Retrieves and removes the head of the queue represented by this deque
@@ -351,7 +351,7 @@ public interface RichDeque<E> extends RichGenericQueue<E>
      *         of the stack represented by this deque)
      * @throws NoSuchElementException if this deque is empty
      */
-    E pop();
+    E pop() throws Exception;
 
 
     // *** Collection methods ***

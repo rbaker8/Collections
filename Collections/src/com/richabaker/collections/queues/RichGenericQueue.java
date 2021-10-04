@@ -42,7 +42,7 @@ public interface RichGenericQueue<E> extends Iterable<E>
      * @throws IllegalArgumentException if some property of this element
      *         prevents it from being added to this queue
      */
-    boolean offer(E e);
+    boolean offer(E e) throws Exception;
 
     /**
      * Retrieves and removes the head of this queue.  This method differs
@@ -60,7 +60,7 @@ public interface RichGenericQueue<E> extends Iterable<E>
      *
      * @return the head of this queue, or {@code null} if this queue is empty
      */
-    E poll();
+    E poll() throws Exception;
 
     /**
      * Retrieves, but does not remove, the head of this queue.  This method
@@ -70,7 +70,7 @@ public interface RichGenericQueue<E> extends Iterable<E>
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
-    E element();
+    E element() throws Exception;
 
     /**
      * Retrieves, but does not remove, the head of this queue,

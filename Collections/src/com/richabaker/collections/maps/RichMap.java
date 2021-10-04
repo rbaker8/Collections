@@ -1,5 +1,7 @@
 package com.richabaker.collections.maps;
 
+import com.richabaker.collections.sets.RichSet;
+
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -8,7 +10,7 @@ import java.util.function.Function;
 
 public interface RichMap<K,V> {
 
-        //int size();
+        int size();
 
         /**
          * Returns <tt>true</tt> if this map contains no key-value mappings.
@@ -16,7 +18,7 @@ public interface RichMap<K,V> {
          * @return <tt>true</tt> if this map contains no key-value mappings
          */
 
-        //boolean isEmpty();
+        boolean isEmpty();
 
 
         /**
@@ -36,7 +38,7 @@ public interface RichMap<K,V> {
          *         does not permit null keys
          * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
          */
-        //boolean containsKey(Object key);
+        boolean containsKey(Object key);
 
         /**
          * Returns <tt>true</tt> if this map maps one or more keys to the
@@ -56,7 +58,7 @@ public interface RichMap<K,V> {
          *         map does not permit null values
          * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
          */
-        //boolean containsValue(Object value);
+        boolean containsValue(Object value);
 
         /**
          * Returns the value to which the specified key is mapped,
@@ -83,7 +85,7 @@ public interface RichMap<K,V> {
          *         does not permit null keys
          * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
          */
-        //V get(Object key);
+        V get(Object key);
 
         // Modification Operations
 
@@ -111,7 +113,7 @@ public interface RichMap<K,V> {
          * @throws IllegalArgumentException if some property of the specified key
          *         or value prevents it from being stored in this map
          */
-        //V put(K key, V value);
+        V put(K key, V value);
 
         /**
          * Removes the mapping for a key from this map if it is present
@@ -143,7 +145,7 @@ public interface RichMap<K,V> {
          *         map does not permit null keys
          * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
          */
-        //V remove(Object key);
+        V remove(Object key);
 
 
         // Bulk Operations
@@ -176,7 +178,7 @@ public interface RichMap<K,V> {
          * @throws UnsupportedOperationException if the <tt>clear</tt> operation
          *         is not supported by this map
          */
-        //void clear();
+        void clear();
 
 
         // Views
@@ -229,9 +231,10 @@ public interface RichMap<K,V> {
          * <tt>clear</tt> operations.  It does not support the
          * <tt>add</tt> or <tt>addAll</tt> operations.
          *
+         *
          * @return a set view of the mappings contained in this map
          */
-        //Set<Map.Entry<K, V>> entrySet();
+        RichSet<RichEntry<K, V>> entrySet();
 
 /**
  * A map entry (key-value pair).  The <tt>Map.entrySet</tt> method returns
@@ -246,7 +249,7 @@ public interface RichMap<K,V> {
  * @see Map#entrySet()
  * @since 1.2
  */
-interface Entry<K,V> {
+interface RichEntry<K,V> {
     /**
      * Returns the key corresponding to this entry.
      *

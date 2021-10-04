@@ -14,9 +14,30 @@ public class QueueTests implements Test
     {
         try
         {
-            RichGenericQueue<String> queue = new RichArrayQueue<>(100);
+            RichGenericQueue<String> queue = new RichArrayQueue<>(10);
             queue.add("Deb");
             queue.add("Rich");
+            assert queue.size() == 2;
+            assert !queue.isEmpty();
+            assert queue.remove().equals("Deb");
+            assert queue.remove().equals("Rich");
+            assert queue.size() == 0;
+            assert queue.isEmpty();
+
+            // test circular array implementation of queue
+            for (int i = 0; i < 10; i++)
+            {
+                queue.add("a");
+                queue.add("b");
+                queue.add("c");
+                queue.add("d");
+                queue.add("e");
+                assert queue.remove().equals("a");
+                assert queue.remove().equals("b");
+                assert queue.remove().equals("c");
+                assert queue.remove().equals("d");
+                assert queue.remove().equals("e");
+            }
         }
         catch (Exception e)
         {
@@ -32,6 +53,31 @@ public class QueueTests implements Test
             RichLinkedListQueue<String> queue = new RichLinkedListQueue<>();
             queue.add("Deb");
             queue.add("Rich");
+            assert queue.size() == 2;
+            assert !queue.isEmpty();
+            assert queue.remove().equals("Deb");
+            assert queue.remove().equals("Rich");
+            assert queue.size() == 0;
+            assert queue.isEmpty();
+            queue.add("Deb");
+            queue.add("Rich");
+            queue.clear();
+            assert queue.isEmpty();
+            assert queue.size() == 0;
+
+            for (int i = 0; i < 10; i++)
+            {
+                queue.add("a");
+                queue.add("b");
+                queue.add("c");
+                queue.add("d");
+                queue.add("e");
+                assert queue.remove().equals("a");
+                assert queue.remove().equals("b");
+                assert queue.remove().equals("c");
+                assert queue.remove().equals("d");
+                assert queue.remove().equals("e");
+            }
         }
         catch (Exception e)
         {

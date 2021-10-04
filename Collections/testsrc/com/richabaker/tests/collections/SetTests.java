@@ -2,6 +2,7 @@ package com.richabaker.tests.collections;
 
 import com.richabaker.collections.maps.RichHashMap;
 import com.richabaker.collections.sets.RichHashSet;
+import com.richabaker.collections.sets.RichSet;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
@@ -16,7 +17,7 @@ public class SetTests implements Test
     @Test
     public void testRichHashSet()
     {
-        //RichHashSet<String> set = new RichHashSet<>();
+        RichSet<String> set = new RichHashSet<>();
     }
 
     @Override

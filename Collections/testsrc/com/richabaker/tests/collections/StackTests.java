@@ -21,27 +21,35 @@ public class StackTests implements Test
     @Test
     public void arrayStackTests()
     {
-       arrayStack.push("a");
-       arrayStack.push("b");
-       arrayStack.push("c");
-       assert arrayStack.pop().equals("c");
-       assert arrayStack.pop().equals("b");
-       assert arrayStack.pop().equals("a");
+       try {
+           arrayStack.push("a");
+           arrayStack.push("b");
+           arrayStack.push("c");
+           assert arrayStack.pop().equals("c");
+           assert arrayStack.pop().equals("b");
+           assert arrayStack.pop().equals("a");
 
-       arrayStack.push("a");
-       arrayStack.push("b");
-       arrayStack.push("c");
-       assert arrayStack.size() == 3;
+           arrayStack.push("a");
+           arrayStack.push("b");
+           arrayStack.push("c");
+           assert arrayStack.size() == 3;
 
-       arrayStack.clear();
-       assert arrayStack.size() == 0;
+           arrayStack.clear();
+           assert arrayStack.size() == 0;
 
-       assert arrayStack.pop() == null;
+           assert arrayStack.pop() == null;
+       }
+       catch (Exception e)
+       {
+           assert false;
+       }
     }
 
     @Test
     public void linkedListStackTests()
     {
+        try
+        {
             linkedListStack.push("a");
             linkedListStack.push("b");
             linkedListStack.push("c");
@@ -56,15 +64,19 @@ public class StackTests implements Test
 
             linkedListStack.clear();
             assert linkedListStack.size() == 0;
-
             try
             {
                 linkedListStack.pop();
             }
-            catch (NoSuchElementException e)
+            catch(Exception e)
             {
 
             }
+        }
+        catch (Exception e)
+        {
+            assert false;
+        }
     }
 
     @Override

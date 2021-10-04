@@ -19,6 +19,12 @@ public class RichArrayStack<E> extends RichArrayList<E> implements RichGenericSt
         capacity = INITIAL_SIZE;
     }
 
+    public RichArrayStack(int capacity)
+    {
+        items = (E[]) new Object[capacity];
+        this.capacity = capacity;
+    }
+
     private void checkCapacity()
     {
         if (size == capacity) {

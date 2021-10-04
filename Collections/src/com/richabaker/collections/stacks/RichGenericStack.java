@@ -14,7 +14,7 @@ public interface RichGenericStack<E> extends RichDeque<E>
      * Pop implements LIFO retrieval.  Pop returns the top element of the stack, and removes it from the stack.
      * @return the top element of the stack, or null if the stack is empty.
      */
-    E pop();
+    //E pop();
 
     /**
      * returns the number of elements on the stack
