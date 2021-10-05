@@ -2,6 +2,9 @@ package com.richabaker.collections.maps;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
+import java.util.function.IntConsumer;
+import java.util.function.LongConsumer;
 
 public interface RichSpliterator<T>
 {
@@ -293,4 +296,261 @@ public interface RichSpliterator<T>
          * but not the exact sizes of subtrees.
          */
         public static final int SUBSIZED = 0x00004000;
+
+        /**
+         * A Spliterator specialized for primitive values.
+         *
+         * @param <T> the type of elements returned by this Spliterator.  The
+         * type must be a wrapper type for a primitive type, such as {@code Integer}
+         * for the primitive {@code int} type.
+         * @param <T_CONS> the type of primitive consumer.  The type must be a
+         * primitive specialization of {@link java.util.function.Consumer} for
+         * {@code T}, such as {@link java.util.function.IntConsumer} for
+         * {@code Integer}.
+         * @param <T_SPLITR> the type of primitive Spliterator.  The type must be
+         * a primitive specialization of Spliterator for {@code T}, such as
+         * {@link Spliterator.OfInt} for {@code Integer}.
+         *
+         * @see Spliterator.OfInt
+         * @see Spliterator.OfLong
+         * @see Spliterator.OfDouble
+         * @since 1.8
+         */
+        public interface OfPrimitive<T, T_CONS, T_SPLITR extends RichSpliterator.OfPrimitive<T, T_CONS, T_SPLITR>>
+                extends RichSpliterator<T> {
+                @Override
+                T_SPLITR trySplit();
+
+                /**
+                 * If a remaining element exists, performs the given action on it,
+                 * returning {@code true}; else returns {@code false}.  If this
+                 * Spliterator is {@link #ORDERED} the action is performed on the
+                 * next element in encounter order.  Exceptions thrown by the
+                 * action are relayed to the caller.
+                 *
+                 * @param action The action
+                 * @return {@code false} if no remaining elements existed
+                 * upon entry to this method, else {@code true}.
+                 * @throws NullPointerException if the specified action is null
+                 */
+                @SuppressWarnings("overloads")
+                boolean tryAdvance(T_CONS action);
+
+                /**
+                 * Performs the given action for each remaining element, sequentially in
+                 * the current thread, until all elements have been processed or the
+                 * action throws an exception.  If this Spliterator is {@link #ORDERED},
+                 * actions are performed in encounter order.  Exceptions thrown by the
+                 * action are relayed to the caller.
+                 *
+                 * @implSpec
+                 * The default implementation repeatedly invokes {@link #tryAdvance}
+                 * until it returns {@code false}.  It should be overridden whenever
+                 * possible.
+                 *
+                 * @param action The action
+                 * @throws NullPointerException if the specified action is null
+                 */
+                @SuppressWarnings("overloads")
+                default void forEachRemaining(T_CONS action) {
+                        do { } while (tryAdvance(action));
+                }
+        }
+
+        /**
+         * A Spliterator specialized for {@code int} values.
+         * @since 1.8
+         */
+        public interface OfInt extends RichSpliterator.OfPrimitive<Integer, IntConsumer, RichSpliterator.OfInt>
+        {
+
+                @Override
+                OfInt trySplit();
+
+                @Override
+                boolean tryAdvance(IntConsumer action);
+
+                @Override
+                default void forEachRemaining(IntConsumer action) {
+                        do { } while (tryAdvance(action));
+                }
+
+                /**
+                 * {@inheritDoc}
+                 * @implSpec
+                 * If the action is an instance of {@code IntConsumer} then it is cast
+                 * to {@code IntConsumer} and passed to
+                 * {@link #tryAdvance(java.util.function.IntConsumer)}; otherwise
+                 * the action is adapted to an instance of {@code IntConsumer}, by
+                 * boxing the argument of {@code IntConsumer}, and then passed to
+                 * {@link #tryAdvance(java.util.function.IntConsumer)}.
+                 */
+                @Override
+                default boolean tryAdvance(Consumer<? super Integer> action) {
+                        if (action instanceof IntConsumer) {
+                                return tryAdvance((IntConsumer) action);
+                        }
+                        else {
+                                //if (Tripwire.ENABLED)
+                                //        Tripwire.trip(getClass(),
+                                //                "{0} calling Spliterator.OfInt.tryAdvance((IntConsumer) action::accept)");
+                                return tryAdvance((IntConsumer) action::accept);
+                        }
+                }
+
+                /**
+                 * {@inheritDoc}
+                 * @implSpec
+                 * If the action is an instance of {@code IntConsumer} then it is cast
+                 * to {@code IntConsumer} and passed to
+                 * {@link #forEachRemaining(java.util.function.IntConsumer)}; otherwise
+                 * the action is adapted to an instance of {@code IntConsumer}, by
+                 * boxing the argument of {@code IntConsumer}, and then passed to
+                 * {@link #forEachRemaining(java.util.function.IntConsumer)}.
+                 */
+                @Override
+                default void forEachRemaining(Consumer<? super Integer> action) {
+                        if (action instanceof IntConsumer) {
+                                forEachRemaining((IntConsumer) action);
+                        }
+                        else {
+                                //if (Tripwire.ENABLED)
+                                //        Tripwire.trip(getClass(),
+                                //                "{0} calling Spliterator.OfInt.forEachRemaining((IntConsumer) action::accept)");
+                                forEachRemaining((IntConsumer) action::accept);
+                        }
+                }
+        }
+
+        /**
+         * A Spliterator specialized for {@code long} values.
+         * @since 1.8
+         */
+        public interface OfLong extends RichSpliterator.OfPrimitive<Long, LongConsumer, RichSpliterator.OfLong>
+        {
+
+                @Override
+                OfLong trySplit();
+
+                @Override
+                boolean tryAdvance(LongConsumer action);
+
+                @Override
+                default void forEachRemaining(LongConsumer action) {
+                        do { } while (tryAdvance(action));
+                }
+
+                /**
+                 * {@inheritDoc}
+                 * @implSpec
+                 * If the action is an instance of {@code LongConsumer} then it is cast
+                 * to {@code LongConsumer} and passed to
+                 * {@link #tryAdvance(java.util.function.LongConsumer)}; otherwise
+                 * the action is adapted to an instance of {@code LongConsumer}, by
+                 * boxing the argument of {@code LongConsumer}, and then passed to
+                 * {@link #tryAdvance(java.util.function.LongConsumer)}.
+                 */
+                @Override
+                default boolean tryAdvance(Consumer<? super Long> action) {
+                        if (action instanceof LongConsumer) {
+                                return tryAdvance((LongConsumer) action);
+                        }
+                        else {
+                                //if (Tripwire.ENABLED)
+                                //        Tripwire.trip(getClass(),
+                                //                "{0} calling Spliterator.OfLong.tryAdvance((LongConsumer) action::accept)");
+                                return tryAdvance((LongConsumer) action::accept);
+                        }
+                }
+
+                /**
+                 * {@inheritDoc}
+                 * @implSpec
+                 * If the action is an instance of {@code LongConsumer} then it is cast
+                 * to {@code LongConsumer} and passed to
+                 * {@link #forEachRemaining(java.util.function.LongConsumer)}; otherwise
+                 * the action is adapted to an instance of {@code LongConsumer}, by
+                 * boxing the argument of {@code LongConsumer}, and then passed to
+                 * {@link #forEachRemaining(java.util.function.LongConsumer)}.
+                 */
+                @Override
+                default void forEachRemaining(Consumer<? super Long> action) {
+                        if (action instanceof LongConsumer) {
+                                forEachRemaining((LongConsumer) action);
+                        }
+                        else {
+                                //if (Tripwire.ENABLED)
+                                //        Tripwire.trip(getClass(),
+                                //                "{0} calling Spliterator.OfLong.forEachRemaining((LongConsumer) action::accept)");
+                                forEachRemaining((LongConsumer) action::accept);
+                        }
+                }
+        }
+
+        /**
+         * A Spliterator specialized for {@code double} values.
+         * @since 1.8
+         */
+        public interface OfDouble extends RichSpliterator.OfPrimitive<Double, DoubleConsumer, RichSpliterator.OfDouble>
+        {
+
+                @Override
+                OfDouble trySplit();
+
+                @Override
+                boolean tryAdvance(DoubleConsumer action);
+
+                @Override
+                default void forEachRemaining(DoubleConsumer action) {
+                        do { } while (tryAdvance(action));
+                }
+
+                /**
+                 * {@inheritDoc}
+                 * @implSpec
+                 * If the action is an instance of {@code DoubleConsumer} then it is
+                 * cast to {@code DoubleConsumer} and passed to
+                 * {@link #tryAdvance(java.util.function.DoubleConsumer)}; otherwise
+                 * the action is adapted to an instance of {@code DoubleConsumer}, by
+                 * boxing the argument of {@code DoubleConsumer}, and then passed to
+                 * {@link #tryAdvance(java.util.function.DoubleConsumer)}.
+                 */
+                @Override
+                default boolean tryAdvance(Consumer<? super Double> action) {
+                        if (action instanceof DoubleConsumer) {
+                                return tryAdvance((DoubleConsumer) action);
+                        }
+                        else {
+                                //if (Tripwire.ENABLED)
+                                //        Tripwire.trip(getClass(),
+                                //                "{0} calling Spliterator.OfDouble.tryAdvance((DoubleConsumer) action::accept)");
+                                return tryAdvance((DoubleConsumer) action::accept);
+                        }
+                }
+
+                /**
+                 * {@inheritDoc}
+                 * @implSpec
+                 * If the action is an instance of {@code DoubleConsumer} then it is
+                 * cast to {@code DoubleConsumer} and passed to
+                 * {@link #forEachRemaining(java.util.function.DoubleConsumer)};
+                 * otherwise the action is adapted to an instance of
+                 * {@code DoubleConsumer}, by boxing the argument of
+                 * {@code DoubleConsumer}, and then passed to
+                 * {@link #forEachRemaining(java.util.function.DoubleConsumer)}.
+                 */
+                @Override
+                default void forEachRemaining(Consumer<? super Double> action) {
+                        if (action instanceof DoubleConsumer) {
+                                forEachRemaining((DoubleConsumer) action);
+                        }
+                        else {
+                                //if (Tripwire.ENABLED)
+                                //        Tripwire.trip(getClass(),
+                                //                "{0} calling Spliterator.OfDouble.forEachRemaining((DoubleConsumer) action::accept)");
+                                forEachRemaining((DoubleConsumer) action::accept);
+                        }
+                }
+        }
+
 }

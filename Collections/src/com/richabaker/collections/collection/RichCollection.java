@@ -1,5 +1,6 @@
 package com.richabaker.collections.collection;
 
+import com.richabaker.collections.maps.RichSpliterator;
 import com.richabaker.collections.maps.RichSpliterators;
 
 import java.util.*;
@@ -668,7 +669,7 @@ public interface RichCollection<E>  extends Iterable<E>
         @Override
         default Spliterator<E> spliterator()
         {
-            return RichSpliterators.spliterator(this, 0);
+            return RichSpliterators.RichSpliterator(this, 0);
         }
 
         /**

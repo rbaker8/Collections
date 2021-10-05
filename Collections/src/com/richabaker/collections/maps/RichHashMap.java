@@ -683,7 +683,7 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
 
         public final Spliterator<K> spliterator()
         {
-            return new RichHashMap.RichKeySpliterator<>(RichHashMap.this, 0, -1, 0, 0);
+            return new RichHashMap.RichKeySpliterator<K, V>(RichHashMap.this, 0, -1, 0, 0);
         }
 
         public final void forEach(Consumer<? super K> action)
