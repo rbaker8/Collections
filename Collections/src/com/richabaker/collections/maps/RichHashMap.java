@@ -381,6 +381,19 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
     }
 
     /**
+     * Reset to initial default state.  Called by clone and readObject.
+     */
+    void reinitialize() {
+        table = null;
+        entrySet = null;
+        keySet = null;
+        values = null;
+        modCount = 0;
+        threshold = 0;
+        size = 0;
+    }
+
+    /**
      * Returns {@code true} if this map contains a mapping for the
      * specified key.
      *
@@ -796,7 +809,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
     /* ------------------------------------------------------------ */
     // iterators
 
-    abstract class RichHashIterator {
+    abstract class RichHashIterator
+    {
         RichHashMap.RichNode<K,V> next;        // next entry to return
         RichHashMap.RichNode<K,V> current;     // current entry
         int expectedModCount;  // for fast-fail
@@ -816,7 +830,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
             return next != null;
         }
 
-        final RichHashMap.RichNode<K,V> nextNode() {
+        final RichHashMap.RichNode<K,V> nextNode()
+        {
             RichHashMap.RichNode<K,V>[] t;
             RichHashMap.RichNode<K,V> e = next;
             if (modCount != expectedModCount)
@@ -829,7 +844,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
             return e;
         }
 
-        public final void remove() {
+        public final void remove()
+        {
             RichHashMap.RichNode<K,V> p = current;
             if (p == null)
                 throw new IllegalStateException();
@@ -860,7 +876,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
     /* ------------------------------------------------------------ */
     // spliterators
 
-    static class RichHashMapSpliterator<K,V> {
+    static class RichHashMapSpliterator<K,V>
+    {
         final RichHashMap<K,V> map;
         RichHashMap.RichNode<K,V> current;          // current node
         int index;                  // current index, modified on advance/split
@@ -870,7 +887,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
 
         RichHashMapSpliterator(RichHashMap<K,V> m, int origin,
                            int fence, int est,
-                           int expectedModCount) {
+                           int expectedModCount)
+        {
             this.map = m;
             this.index = origin;
             this.fence = fence;
@@ -878,7 +896,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
             this.expectedModCount = expectedModCount;
         }
 
-        final int getFence() { // initialize fence and size on first use
+        final int getFence()
+        { // initialize fence and size on first use
             int hi;
             if ((hi = fence) < 0) {
                 RichHashMap<K,V> m = map;
@@ -890,7 +909,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
             return hi;
         }
 
-        public final long estimateSize() {
+        public final long estimateSize()
+        {
             getFence(); // force init
             return (long) est;
         }
@@ -898,20 +918,23 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
 
     static final class RichKeySpliterator<K,V>
             extends RichHashMap.RichHashMapSpliterator<K,V>
-            implements RichSpliterator<K> {
+            implements Spliterator<K>
+        {
         RichKeySpliterator(RichHashMap<K,V> m, int origin, int fence, int est,
                        int expectedModCount) {
             super(m, origin, fence, est, expectedModCount);
         }
 
-        public RichHashMap.RichKeySpliterator<K,V> trySplit() {
+        public RichHashMap.RichKeySpliterator<K,V> trySplit()
+        {
             int hi = getFence(), lo = index, mid = (lo + hi) >>> 1;
             return (lo >= mid || current != null) ? null :
                     new RichHashMap.RichKeySpliterator<>(map, lo, index = mid, est >>>= 1,
                             expectedModCount);
         }
 
-        public void forEachRemaining(Consumer<? super K> action) {
+        public void forEachRemaining(Consumer<? super K> action)
+        {
             int i, hi, mc;
             if (action == null)
                 throw new NullPointerException();
@@ -940,7 +963,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
             }
         }
 
-        public boolean tryAdvance(Consumer<? super K> action) {
+        public boolean tryAdvance(Consumer<? super K> action)
+        {
             int hi;
             if (action == null)
                 throw new NullPointerException();
@@ -962,7 +986,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
             return false;
         }
 
-        public int characteristics() {
+        public int characteristics()
+        {
             return (fence < 0 || est == map.size ? Spliterator.SIZED : 0) |
                     Spliterator.DISTINCT;
         }
@@ -970,7 +995,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
 
     static final class RichValueSpliterator<K,V>
             extends RichHashMap.RichHashMapSpliterator<K,V>
-            implements RichSpliterator<V> {
+            implements Spliterator<V>
+    {
         RichValueSpliterator(RichHashMap<K,V> m, int origin, int fence, int est,
                          int expectedModCount) {
             super(m, origin, fence, est, expectedModCount);
@@ -1035,13 +1061,13 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
         }
 
         public int characteristics() {
-            return (fence < 0 || est == map.size ? RichSpliterator.SIZED : 0);
+            return (fence < 0 || est == map.size ? Spliterator.SIZED : 0);
         }
     }
 
     static final class RichEntrySpliterator<K,V>
             extends RichHashMap.RichHashMapSpliterator<K,V>
-            implements RichSpliterator<RichMap.RichEntry<K,V>> {
+            implements Spliterator<RichMap.RichEntry<K,V>> {
         RichEntrySpliterator(RichHashMap<K,V> m, int origin, int fence, int est,
                          int expectedModCount) {
             super(m, origin, fence, est, expectedModCount);
@@ -1106,8 +1132,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
         }
 
         public int characteristics() {
-            return (fence < 0 || est == map.size ? RichSpliterator.SIZED : 0) |
-                    RichSpliterator.DISTINCT;
+            return (fence < 0 || est == map.size ? Spliterator.SIZED : 0) |
+                    Spliterator.DISTINCT;
         }
     }
 

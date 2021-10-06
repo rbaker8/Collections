@@ -1,13 +1,10 @@
 package com.richabaker.collections.collection;
 
-import com.richabaker.collections.maps.RichSpliterator;
-import com.richabaker.collections.maps.RichSpliterators;
-
 import java.util.*;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-public interface RichCollection<E>  extends Iterable<E>
+public interface RichCollection<E>  extends Collection<E>
 {
     /**
      * The root interface in the <i>collection hierarchy</i>.  A collection
@@ -666,11 +663,11 @@ public interface RichCollection<E>  extends Iterable<E>
          * @return a {@code Spliterator} over the elements in this collection
          * @since 1.8
          */
-        @Override
-        default Spliterator<E> spliterator()
-        {
-            return RichSpliterators.RichSpliterator(this, 0);
-        }
+        //@Override
+        //default Spliterator<E> spliterator()
+        //{
+        //    return Spliterators.Spliterator(this, 0);
+        //}
 
         /**
          * Returns a sequential {@code Stream} with this collection as its source.

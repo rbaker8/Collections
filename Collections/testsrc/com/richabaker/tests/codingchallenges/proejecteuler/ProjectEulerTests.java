@@ -1,6 +1,6 @@
 package com.richabaker.tests.codingchallenges.proejecteuler;
 
-import com.richabaker.projecteuler.ProjectEuler;
+import com.richabaker.codingchallenges.projecteuler.ProjectEuler;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;

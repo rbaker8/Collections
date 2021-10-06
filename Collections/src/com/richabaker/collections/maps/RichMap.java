@@ -8,7 +8,8 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public interface RichMap<K,V> {
+public interface RichMap<K,V>
+{
 
         int size();
 
@@ -198,7 +199,7 @@ public interface RichMap<K,V> {
          *
          * @return a set view of the keys contained in this map
          */
-        //Set<K> keySet();
+        RichSet<K> keySet();
 
         /**
          * Returns a {@link Collection} view of the values contained in this map.

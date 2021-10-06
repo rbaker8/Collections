@@ -1,6 +1,7 @@
 package com.richabaker.collections.maps;
 
 
+import com.richabaker.collections.collection.RichCollection;
 import com.richabaker.collections.sets.RichAbstractSet;
 import com.richabaker.collections.sets.RichSet;
 
@@ -182,6 +183,7 @@ public abstract class RichAbstractMap<K,V> implements RichMap<K,V>
          *}</pre>
          */
         transient RichSet<K> keySet;
+        transient volatile RichCollection<V> values;
 
         /**
          * {@inheritDoc}

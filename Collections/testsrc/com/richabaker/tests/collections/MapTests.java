@@ -1,6 +1,8 @@
 package com.richabaker.tests.collections;
 
 import com.richabaker.collections.maps.RichHashMap;
+import com.richabaker.collections.maps.RichLinkedHashMap;
+import com.richabaker.collections.maps.RichMap;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
@@ -16,7 +18,33 @@ public class MapTests implements Test
     @Test
     public void testRichHashMap()
     {
-        RichHashMap<Character, Integer> map = new RichHashMap<>();
+        RichMap<Character, Integer> map = new RichHashMap<>();
+        map.put('A', 0);
+        map.put('B', 0);
+        map.put('C', 0);
+        map.put('D', 0);
+        map.put('E', 0);
+        map.put('F', 0);
+        map.put('G', 0);
+        map.put('H', 0);
+        assert map.size() == 8;
+        assert map.containsKey('A');
+        assert map.get('A').equals(0);
+        map.put('A', 1);
+        assert map.get('A').equals(1);
+        assert !map.containsKey('I');
+        map.remove('A');
+        assert !map.containsKey('A');
+        assert map.size() == 7;
+        map.clear();
+        assert map.size() == 0;
+        assert !map.containsKey('B');
+    }
+
+    @Test
+    public void testRichLinkedHashMap()
+    {
+        RichMap<Character, Integer> map = new RichLinkedHashMap<>();
         map.put('A', 0);
         map.put('B', 0);
         map.put('C', 0);

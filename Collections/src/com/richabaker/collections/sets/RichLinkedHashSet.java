@@ -2,8 +2,9 @@ package com.richabaker.collections.sets;
 
 
 import com.richabaker.collections.collection.RichCollection;
-import com.richabaker.collections.maps.RichSpliterator;
-import com.richabaker.collections.maps.RichSpliterators;
+
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 
 /**
@@ -19,7 +20,7 @@ import com.richabaker.collections.maps.RichSpliterators;
  * the invocation.)
  *
  * <p>This implementation spares its clients from the unspecified, generally
- * chaotic ordering provided by {@link HashSet}, without incurring the
+ * chaotic ordering provided by {@link RichHashSet}, without incurring the
  * increased cost associated with {@link TreeSet}.  It can be used to
  * produce a copy of a set that has the same order as the original, regardless
  * of the original set's implementation:
@@ -88,11 +89,9 @@ import com.richabaker.collections.maps.RichSpliterators;
  *
  * @author  Josh Bloch
  * @see     Object#hashCode()
- * @see     Collection
- * @see     Set
- * @see     HashSet
- * @see     TreeSet
- * @see     Hashtable
+ * @see     RichCollection
+ * @see     RichSet
+ * @see     RichHashSet
  * @since   1.4
  */
 
@@ -171,7 +170,7 @@ public class RichLinkedHashSet<E>
      * @since 1.8
      */
     @Override
-    public RichSpliterator<E> spliterator() {
-        return RichSpliterators.spliterator(this, RichSpliterator.DISTINCT | RichSpliterator.ORDERED);
+    public Spliterator<E> spliterator() {
+        return Spliterators.spliterator(this, Spliterator.DISTINCT | Spliterator.ORDERED);
     }
 }

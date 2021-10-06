@@ -1,6 +1,7 @@
 package com.richabaker.collections.sets;
 
 import com.richabaker.collections.maps.RichHashMap;
+import com.richabaker.collections.maps.RichLinkedHashMap;
 
 import java.util.*;
 
@@ -36,6 +37,24 @@ public class RichHashSet<E> extends RichAbstractSet<E> implements RichSet<E>
      */
     public RichHashSet(int initialCapacity) {
         map = new RichHashMap<>(initialCapacity);
+    }
+
+
+    /**
+     * Constructs a new, empty linked hash set.  (This package private
+     * constructor is only used by LinkedHashSet.) The backing
+     * HashMap instance is a LinkedHashMap with the specified initial
+     * capacity and the specified load factor.
+     *
+     * @param      initialCapacity   the initial capacity of the hash map
+     * @param      loadFactor        the load factor of the hash map
+     * @param      dummy             ignored (distinguishes this
+     *             constructor from other int, float constructor.)
+     * @throws     IllegalArgumentException if the initial capacity is less
+     *             than zero, or if the load factor is nonpositive
+     */
+    RichHashSet(int initialCapacity, float loadFactor, boolean dummy) {
+        map = new RichLinkedHashMap<E, Object>(initialCapacity, loadFactor);
     }
 
     /**

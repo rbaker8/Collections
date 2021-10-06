@@ -1,8 +1,10 @@
 package com.richabaker.collections.sets;
 
+import com.richabaker.collections.collection.RichCollection;
+
 import java.util.*;
 
-public interface RichSet<E>
+public interface RichSet<E> extends RichCollection<E>
 {
 
     /**
