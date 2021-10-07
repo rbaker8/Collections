@@ -3,6 +3,7 @@ package com.richabaker.collections.sets;
 
 import com.richabaker.collections.collection.RichCollection;
 
+import java.util.ConcurrentModificationException;
 import java.util.Spliterator;
 import java.util.Spliterators;
 

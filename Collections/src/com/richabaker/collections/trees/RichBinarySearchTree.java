@@ -1,6 +1,6 @@
 package com.richabaker.collections.trees;
 
-public class RichBinarySearchTree<K extends Comparable<K>, V>
+public class RichBinarySearchTree<K extends Comparable<K>, V> implements RichTree<K, V>
 {
     private class Node
     {

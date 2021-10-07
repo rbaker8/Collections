@@ -26,7 +26,7 @@ public class HackerRankTests implements Test
         int a = testFunction3("fcrxzwscanmligyxyvym", "jxwtrhvujlmrpdoqbisbwhmgpmeoke");
         assert a == 30;
 
-        assert testFunction4("aabcdefff").equals(";a: 2;b: 1;c: 1;d: 1;e: 1;f: 3");
+        assert testFunction4("aabcdefff").equals("a: 2;b: 1;c: 1;d: 1;e: 1;f: 3");
     }
 
     private int testFunction(String a, String b)
