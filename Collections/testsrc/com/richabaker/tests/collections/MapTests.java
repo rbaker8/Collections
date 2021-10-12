@@ -10,6 +10,35 @@ import java.lang.annotation.Annotation;
 public class MapTests implements Test
 {
 
+    // a key class that has a very bad hash implementation to stress test Map
+    private static class BadKey
+    {
+        private String badKey;
+
+        BadKey(String key)
+        {
+            badKey = key;
+        }
+
+        @Override
+        public boolean equals(Object o)
+        {
+            if (this == o)
+                return true;
+
+            if (o instanceof BadKey)
+                return badKey.equals(((BadKey)o).badKey);
+            return false;
+        }
+
+        // a bad hashcode method
+        @Override
+        public int hashCode()
+        {
+            return 0;
+        }
+    }
+
     public MapTests()
     {
 
@@ -39,6 +68,40 @@ public class MapTests implements Test
         map.clear();
         assert map.size() == 0;
         assert !map.containsKey('B');
+
+        RichMap<String, Integer> stringMap = new RichHashMap<>();
+        for (int i = 0; i < 1000; i++)
+        {
+            String key = "Rich" + i;
+
+            // breakpoint for debugging
+            if (i == 300)
+            {
+                int j = i;
+            }
+            stringMap.put (key, i);
+        }
+        assert stringMap.get("Rich300").equals(300);
+
+        RichMap<BadKey, Integer> badMap = new RichHashMap<>();
+        for (int i = 0; i < 1000; i++)
+        {
+            String key = "Rich" + i;
+            BadKey badKey = new BadKey(key);
+
+            // breakpoint for debugging
+            if (i == 300)
+            {
+                int j = i;
+            }
+            badMap.put (badKey, i);
+        }
+        for (int i = 0; i < 1000; i++)
+        {
+            String key = "Rich" + i;
+            BadKey badKey = new BadKey(key);
+            assert badMap.get(badKey).equals(i);
+        }
     }
 
     @Test

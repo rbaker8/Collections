@@ -119,7 +119,6 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
         this.threshold = tableSizeFor(initialCapacity);
     }
 
-
     /**
      * Constructs an empty {@code HashMap} with the specified initial
      * capacity and the default load factor (0.75).
@@ -187,7 +186,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
      * Returns x's Class if it is of the form "class C implements
      * Comparable<C>", else null.
      */
-    static Class<?> comparableClassFor(Object x) {
+    static Class<?> comparableClassFor(Object x)
+    {
         if (x instanceof Comparable) {
             Class<?> c; Type[] ts, as; ParameterizedType p;
             if ((c = x.getClass()) == String.class) // bypass checks
@@ -211,7 +211,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
      * class), else 0.
      */
     @SuppressWarnings({"rawtypes","unchecked"}) // for cast to Comparable
-    static int compareComparables(Class<?> kc, Object k, Object x) {
+    static int compareComparables(Class<?> kc, Object k, Object x)
+    {
         return (x == null || x.getClass() != kc ? 0 :
                 ((Comparable)k).compareTo(x));
     }
@@ -219,7 +220,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
     /**
      * Returns a power of two size for the given target capacity.
      */
-    static final int tableSizeFor(int cap) {
+    static final int tableSizeFor(int cap)
+    {
         int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
@@ -361,29 +363,34 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
 
 
     // Create a regular (non-tree) node
-    RichHashMap.RichNode<K,V> newNode(int hash, K key, V value, RichHashMap.RichNode<K,V> next) {
+    RichHashMap.RichNode<K,V> newNode(int hash, K key, V value, RichHashMap.RichNode<K,V> next)
+    {
         return new RichHashMap.RichNode<>(hash, key, value, next);
     }
 
     // For conversion from TreeNodes to plain nodes
-    RichHashMap.RichNode<K,V> replacementNode(RichHashMap.RichNode<K,V> p, RichHashMap.RichNode<K,V> next) {
+    RichHashMap.RichNode<K,V> replacementNode(RichHashMap.RichNode<K,V> p, RichHashMap.RichNode<K,V> next)
+    {
         return new RichHashMap.RichNode<>(p.hash, p.key, p.value, next);
     }
 
     // Create a tree bin node
-    RichHashMap.RichTreeNode<K,V> newTreeNode(int hash, K key, V value, RichHashMap.RichNode<K,V> next) {
+    RichHashMap.RichTreeNode<K,V> newTreeNode(int hash, K key, V value, RichHashMap.RichNode<K,V> next)
+    {
         return new RichHashMap.RichTreeNode<>(hash, key, value, next);
     }
 
     // For treeifyBin
-    RichHashMap.RichTreeNode<K,V> replacementTreeNode(RichHashMap.RichNode<K,V> p, RichHashMap.RichNode<K,V> next) {
+    RichHashMap.RichTreeNode<K,V> replacementTreeNode(RichHashMap.RichNode<K,V> p, RichHashMap.RichNode<K,V> next)
+    {
         return new RichHashMap.RichTreeNode<>(p.hash, p.key, p.value, next);
     }
 
     /**
      * Reset to initial default state.  Called by clone and readObject.
      */
-    void reinitialize() {
+    void reinitialize()
+    {
         table = null;
         entrySet = null;
         keySet = null;
@@ -423,7 +430,6 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
         return putVal(hash(key), key, value, false, true);
     }
 
-
     /**
      * Implements Map.put and related methods.
      *
@@ -435,7 +441,8 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
      * @return previous value, or null if none
      */
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-                   boolean evict) {
+                   boolean evict)
+    {
         RichHashMap.RichNode<K,V>[] tab; RichHashMap.RichNode<K,V> p; int n, i;
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
@@ -451,7 +458,7 @@ public class RichHashMap<K, V> extends RichAbstractMap<K, V> implements RichMap<
             else {
                 for (int binCount = 0; ; ++binCount) {
                     if ((e = p.next) == null) {
-                        p.next = newNode(hash, key, value, null);
+                         p.next = newNode(hash, key, value, null);
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                             treeifyBin(tab, hash);
                         break;

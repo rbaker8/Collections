@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class RichArrayDeque<E> extends RichArrayQueue<E> implements RichDeque<E>
+public class RichArrayDeque<E> extends RichCircularArrayQueue<E> implements RichDeque<E>
 {
 
     public RichArrayDeque()

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class RichArrayQueue<E> implements RichGenericQueue<E>
+public class RichCircularArrayQueue<E> implements RichGenericQueue<E>
 {
     // Initial Capacity of Buffer
     protected int capacity;
@@ -21,14 +21,14 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
 
     // Constructors
 
-    public RichArrayQueue()
+    public RichCircularArrayQueue()
     {
         // Initializing the capacity of the array
         this.capacity = INITIAL_CAPACITY;
         init();
     }
 
-    public RichArrayQueue(int capacity)
+    public RichCircularArrayQueue(int capacity)
     {
         // Initializing the capacity of the array
         this.capacity = capacity;
@@ -248,7 +248,7 @@ public class RichArrayQueue<E> implements RichGenericQueue<E>
     @Override
     public Iterator<E> iterator()
     {
-        return new RichArrayQueue<E>.RichArrayQueueIterator();
+        return new RichCircularArrayQueue<E>.RichArrayQueueIterator();
     }
 
     private class RichArrayQueueIterator implements Iterator<E>

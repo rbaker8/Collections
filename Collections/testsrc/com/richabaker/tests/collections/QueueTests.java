@@ -1,6 +1,6 @@
 package com.richabaker.tests.collections;
 
-import com.richabaker.collections.queues.RichArrayQueue;
+import com.richabaker.collections.queues.RichCircularArrayQueue;
 import com.richabaker.collections.queues.RichGenericQueue;
 import com.richabaker.collections.queues.RichLinkedListQueue;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class QueueTests implements Test
     {
         try
         {
-            RichGenericQueue<String> queue = new RichArrayQueue<>(10);
+            RichGenericQueue<String> queue = new RichCircularArrayQueue<>(10);
             queue.add("Deb");
             queue.add("Rich");
             assert queue.size() == 2;
